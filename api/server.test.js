@@ -7,6 +7,7 @@
 test('[0]sanity', () => {
   expect(true).not.toBe(false)
 })
+//test
 
 // test('[1] saves the user with a bcrypted password instead of plain text', async () => {
 //   await request(server).post('/api/auth/register').send({ username: 'devon', password: '1234' })
