@@ -3,9 +3,9 @@ const {JWT_SECRET} = require('../secrets/index')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const Jokes = require('../jokes/jokes-model')
-const { checkUsernameExists, checkUsernameFree } = require('../middleware/middleware')
+const { checkUsernameExists, checkUsernameFree, missingField } = require('../middleware/middleware')
 
-router.post('/register', checkUsernameExists, checkUsernameFree,(req, res, next) => {
+router.post('/register', checkUsernameFree,missingField,(req, res, next) => {
   // res.end('implement register, please!');
   /*
     IMPLEMENT
@@ -41,7 +41,7 @@ router.post('/register', checkUsernameExists, checkUsernameFree,(req, res, next)
   .catch(next)
 });
 
-router.post('/login', (req, res, next) => {
+router.post('/login', checkUsernameExists,missingField,(req, res, next) => {
   // res.end('implement login, please!');
   /*
     IMPLEMENT

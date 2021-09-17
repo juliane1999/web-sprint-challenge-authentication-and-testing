@@ -28,9 +28,23 @@ const checkUsernameExists = async (req, res, next) => {
       next(err)
     }
   }
+
+  async function missingField(req,res,next) {
+    try {
+      const users = await Jokes.findBy({username: req.body.username, password: req.body.password})
+      if(!users.username || !users.password) {
+        next()
+      } else {
+        next({message: 'username and password required', status: 422})
+      }
+    } catch(err) {
+      next(err)
+    }
+  }
   
 
 module.exports = {
 checkUsernameExists,
 checkUsernameFree,
+missingField,
 }
